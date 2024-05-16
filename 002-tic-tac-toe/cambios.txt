@@ -1,11 +1,12 @@
 En este commit vamos a crear:
 
 
-- Saber cuando el usuario gana usando un estado
-- He creado la función checkWinner con algunos trucos para comprobar solo las casillas relacionadas con el input del usuario
-- Si hay un ganador, mostrar ganador y no permitir seguir jugando
+- Arreglé unos cambios que no estaban bien del commit anterior.
+- Añadir Local Storage para no perder la partida si se refresca
 
 
 Cosas que recordar:
 
-- Los estados y las props hay que tratarlas como inmutables para no tener discrepacias en el renderizado
+- Los useState nunca deben usarse dentro de un if, React tiene una cuenta interna y esto daría problemas.
+- Los useState en el cuerpo de App por ejemplo (o del componente) se ejecutarían cada vez que se renderiza un componente, en cambio, si lees por ejemplo del localStorage
+    solo quieres leer cuando se inicializa, por lo que puedes construir una función dentro de la call de useState para usar el valor de local storage o el default.

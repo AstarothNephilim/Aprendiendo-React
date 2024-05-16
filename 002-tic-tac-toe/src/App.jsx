@@ -1,14 +1,8 @@
 import { useState } from "react";
-import Square from "./components/Square";
-import { checkWinner, checkEndGame } from "./logic/Board";
-import { WinnerModal } from './components/WinnerModal.jsx'
-
-const TURNS = {
-  X: "x",
-  O: "o",
-};
-
-
+import { Square } from "./components/Square.jsx";
+import { checkWinner, checkEndGame } from "./logic/board.jsx";
+import { WinnerModal } from "./components/WinnerModal.jsx";
+import { TURNS } from "./constants.js";
 
 function App() {
   /* Nos interesa que el board sea un estado. Recuerda que cada vez que cambia un estado, 
@@ -16,18 +10,33 @@ function App() {
 
   /* Recuerda que useState devuelve un array con dos elementos. El primero es el estado y el
    segundo es la función que lo actualiza */
-  const [board, setBoard] = useState(Array(9).fill(null));
 
-  const [turn, setTurn] = useState(TURNS.X);
+  // NO SE PUEDE LEER AQUÍ EL LOCAL STORAGE
+  // REACT TIENE UN ORDEN INTERNO DE USE STATE, NO SE PUEDE PONER UN USE STATE DENTRO DE UN IF STATEMENT YA QUE
+  // ESTO ROMPE EL ORDEN DE REACT
+
+  // LOS USE STATE SIEMPRE DEBEN USARSE EN EL CUERPO DE UN COMPONENTE
+  const [board, setBoard] = useState(() => {
+    const boardFromStorage = window.localStorage.getItem("board");
+    return boardFromStorage
+      ? JSON.parse(boardFromStorage)
+      : Array(9).fill(null);
+  });
+
+  const [turn, setTurn] = useState(() => {
+    const turnFromStorage = window.localStorage.getItem("turn");
+    return turnFromStorage ? turnFromStorage : TURNS.X;
+  });
   const [winner, setWinner] = useState(null); // Null = No hay ganador, False = Empate
 
-
   const resetGame = () => {
-    setBoard(Array(9).fill(null))
-    setTurn(TURNS.X)
-    setWinner(null)
-  }
+    setBoard(Array(9).fill(null));
+    setTurn(TURNS.X);
+    setWinner(null);
 
+    window.localStorage.removeItem("board"); 
+    window.localStorage.removeItem("turn");
+  };
 
   const updateBoard = (index) => {
     // ¿Por qué creamos una nueva copia? Porque no podemos modificar el estado
@@ -40,6 +49,10 @@ function App() {
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
     setTurn(newTurn);
 
+    // Guardar el estado del tablero. En local storage solo puedes guardar un string
+    window.localStorage.setItem("board", JSON.stringify(newBoard));
+    window.localStorage.setItem("turn", newTurn);
+    // Check winner
     const newWinner = checkWinner(index, newBoard);
     console.log("Winner:", newWinner);
     if (newWinner) {
@@ -51,7 +64,7 @@ function App() {
 
   return (
     <main className="board">
-      <h1>Tic tac toe</h1>
+      <h1>Tres en raya</h1>
       <button onClick={resetGame}> Volver a empezar </button>
       <section className="game">
         {/* Acuerdate de que .map devuelve un array al que se le aplica una función*/}
