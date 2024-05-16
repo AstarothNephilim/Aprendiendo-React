@@ -9,4 +9,5 @@ Cosas que recordar:
 
 - Los useState nunca deben usarse dentro de un if, React tiene una cuenta interna y esto daría problemas.
 - Los useState en el cuerpo de App por ejemplo (o del componente) se ejecutarían cada vez que se renderiza un componente, en cambio, si lees por ejemplo del localStorage
-    solo quieres leer cuando se inicializa, por lo que puedes construir una función dentro de la call de useState para usar el valor de local storage o el default.
+    solo quieres leer cuando se inicializa, por lo que puedes construir una función dentro de la call de useState para usar el valor de local storage o el default (usar un callback para inicializar
+    el estado)
