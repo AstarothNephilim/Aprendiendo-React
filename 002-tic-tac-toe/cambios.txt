@@ -1,9 +1,11 @@
 En este commit vamos a crear:
 
 
-- Estado que controle el turno (x, o)
-- Hacer una función que actualice el tablero al hacer click y rellene el tablero.
-- Añadir section para controlar turno
-- Se añade prop a Square para controlar el turno
-- Se crea la función UpdateBoard para controlar los cambios de estado al hacer click. Tambien
-    se encarga de cambiar el turno
+- Saber cuando el usuario gana usando un estado
+- He creado la función checkWinner con algunos trucos para comprobar solo las casillas relacionadas con el input del usuario
+- Si hay un ganador, mostrar ganador y no permitir seguir jugando
+
+
+Cosas que recordar:
+
+- Los estados y las props hay que tratarlas como inmutables para no tener discrepacias en el renderizado
