@@ -1,9 +1,9 @@
+import { useState } from 'react';
+
 const TURNS = {
   X: "x",
   O: "o",
 };
-
-const board = Array(9).fill(null);
 
 /* Nos interesa crear componentes para poder manejar los estados */
 /* En este caso, vamos a crear un componente para cada celda del tablero */
@@ -18,6 +18,14 @@ const Square = ({ children, updateBoard, index }) => {
 }
 
 function App() {
+  /* Nos interesa que el board sea un estado. Recuerda que cada vez que cambia un estado, 
+  se renderiza de nuevo el componente. Queremos que se renderice el tablero si cambia el estado */
+
+  /* Recuerda que useState devuelve un array con dos elementos. El primero es el estado y el
+   segundo es la función que lo actualiza */
+  const [board, setBoard] = useState(Array(9).fill(null));
+  
+
   return (
     <main className="board">
       <h1>Tic tac toe</h1>
