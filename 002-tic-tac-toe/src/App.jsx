@@ -9,9 +9,14 @@ const TURNS = {
 /* En este caso, vamos a crear un componente para cada celda del tablero */
 
 /* La prop children pasa todo los elementos que están dentro del parent */
-const Square = ({ children, updateBoard, index }) => {
+const Square = ({ children,  isSelected,updateBoard, index}) => {
+  const className = `square ${isSelected ? 'is-selected' : ''}`
+
+  const handleClick = () => {
+    updateBoard(index)
+  }
   return (
-    <div className="square">
+    <div onClick = {handleClick} className={className}>
       {children}
     </div>
   )
@@ -24,7 +29,17 @@ function App() {
   /* Recuerda que useState devuelve un array con dos elementos. El primero es el estado y el
    segundo es la función que lo actualiza */
   const [board, setBoard] = useState(Array(9).fill(null));
-  
+
+  const [turn, setTurn] = useState(TURNS.X);
+
+  const updateBoard = (index) => {
+    const newBoard = [...board]
+    newBoard[index] = turn
+    setBoard(newBoard)
+    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
+    setTurn(newTurn)
+    
+  }
 
   return (
     <main className="board">
@@ -35,11 +50,19 @@ function App() {
         {/* En este caso, el key es el index, que es único para cada elemento */}
         {board.map((_, index) => {
           return (
-            <Square key={index} index = {index}>
-              
+            <Square 
+              key={index}
+              index = {index}
+              updateBoard={updateBoard}>
+              {board[index]}
             </Square>
           );
         })}
+      </section>
+      <section className = "turn">
+        {/* Prop isSelected. Cuando turno = turno actual */	}
+        <Square isSelected = {turn === TURNS.X}> {TURNS.X} </Square>
+        <Square isSelected = {turn === TURNS.O}> {TURNS.O} </Square>
       </section>
     </main>
   );
