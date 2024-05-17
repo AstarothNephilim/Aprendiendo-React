@@ -1,0 +1,37 @@
+En este primer commit para el Mouse follower, primero vamos a entender lo que hace el hook useEffect. Sus propiedades, sintaxis, etc.
+
+El hook useEffect es un hook que nos permite que se ejecute código arbitrario cada vez que se monta el componente y cada vez que cambian las dependencias que nosotros decidamos.
+
+¿Qué es montar el componente?
+
+    En términos de React, "montar" un componente se refiere a la fase en la que el componente se está renderizando por primera vez
+        y se está insertando en el DOM. Es la primera fase del ciclo de vida de un componente en React.
+
+    Después de que un componente se monta, puede pasar por fases de actualización (cuando cambian sus props o estado) y desmontaje 
+        (cuando el componente se elimina del DOM).
+
+¿Cómo se usa useEffect?
+
+    Para llamar a useEffect hay que pasarle dos parámetros: 
+        - Function to execute
+        - listOfDependencies (opcional):
+            Si no se lo pasas nada, el código se ejecutará cada vez que se renderice el componente
+            Si le pasamos [], solo se ejecuta cuando se renderice el componente. Similar a componentDidMount
+
+    useEffect puede (o no) devolver un return con una función que se ejecutará cada vez que se desmonte el componente o cada vez que cambien
+    las dependencias. En el caso del useEffect para suscribirse al pointermove, hay que limpiar las suscripciones para que el cursor
+    no se siga siguiendo al presionar el botón. 
+    
+
+En este commit vamos a crear:
+
+
+- useEffect con addEventListener pointermove para seguimiento de las posiciones x,y del cursor. 
+
+
+Cosas que recordar:
+
+- Los hooks no pueden ir dentro de un condicional en el cuerpo de un componente
+- Para suscribirte a eventos puedes usar addEventListener dentro de un useEffect por ejemplo. (Por ejemplo pointermove para seguir
+    la posición del ratón). IMPORTANTE LIMPIAR EVENTOS 
+- TRUCAZO EN CHROME: Para tratar con los eventos en la consola de desarrollador. 
