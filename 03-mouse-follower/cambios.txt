@@ -35,3 +35,5 @@ Cosas que recordar:
 - Para suscribirte a eventos puedes usar addEventListener dentro de un useEffect por ejemplo. (Por ejemplo pointermove para seguir
     la posición del ratón). IMPORTANTE LIMPIAR EVENTOS 
 - TRUCAZO EN CHROME: Para tratar con los eventos en la consola de desarrollador. 
+- ¿Por qué nada más renderizar la página se ejecuta el efecto, se limpia y se vuelve a ejecutar?:
+    Esto es por <React.StrictMode>: Esto ejecuta el efecto, ejecuta el cleanup y despues vuelve a ejecutar el efecto.

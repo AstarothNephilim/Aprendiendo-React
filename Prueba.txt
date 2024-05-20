@@ -1,0 +1,14 @@
+# Prueba técnica para Juniors y Trainees
+
+APIs:
+
+
+- Facts Random: https://catfact.ninja/fact
+- Image Random: https://cataas.com/cat/says/hello
+ 
+ Recupera un hecho aleatorio de gatos y muestra una imagen de un gato con la primera palabra del hecho.
+
+
+ Trampitas tácticas que intentan ver si entiendes:
+
+ Un estado depende del otro estado, es decir, primero recuperamos un dato y después cogemos la imagen. Por ello, deberemos definir los estados.
