@@ -12,3 +12,21 @@ APIs:
  Trampitas tácticas que intentan ver si entiendes:
 
  Un estado depende del otro estado, es decir, primero recuperamos un dato y después cogemos la imagen. Por ello, deberemos definir los estados.
+
+
+ Cosas que he aprendido que tengo que recordar:
+
+ Tanto async await como  return fetch .then ... devuelven promesas. Las promesas las usamos con .then en el caso de return fetch
+ y el await en el caso de async await.
+
+ ¿Cual es la diferencia entre una función normal y un Custom Hook?
+
+ Un Custom Hook permite que se ejecuten Hooks dentro también, mientras que en una función normal no se pueden
+ ejecutar hooks dentro.
+
+ Por ejemplo, en getCatFact no podemos usar useState
+
+ ¿Por qué pasar un objeto al hook en vez de la variable solo? Por ejemplo useCatImage({fact})
+
+ Es una buena práctica pasarle un único objeto como parametro para que así no cambie el nombre y permita la reutilización.
+ 

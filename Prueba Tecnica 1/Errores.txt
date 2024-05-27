@@ -1,0 +1,4 @@
+Cosas que aprender:
+
+    Podemos extraer así como extraemos los componentes, la lógica del programa. A la hora de extraer la lógica del programa es muy importante que en las props no pasemos las funciones
+    nativas de React (i.e setName)

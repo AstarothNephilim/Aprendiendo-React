@@ -1,31 +1,31 @@
 import { useState, useEffect } from "react";
-import Fact from "./components/Fact";
+import Fact from "./components/Facts";
 import "./App.css";
+import { getCatFact } from "./services/facts";
+import { useCatImage } from "./hooks/useCatImage";
+import { useCatFact } from "./hooks/useCatFact";
+
+const CAT_FACT_URL = "https://catfact.ninja/fact";
+const CAT_IMG_URL = "https://cataas.com/cat/says/";
+
 
 function App() {
-  const [catFact, setFact] = useState(null);
-  const [catImage, setImage] = useState(null);
+  const {fact, refreshFact} = useCatFact()
+  const { imageUrl } = useCatImage({ fact })
 
-  const getCatFact = async () => {
-    const response = await fetch("https://catfact.ninja/fact");
-    const data = await response.json();
-    setFact(data.fact);
-  };
+  const handleClick = async () => {
+    refreshFact()
+  }
 
-  useEffect(() => {
-    if (catFact) {
-      setImage(`https://cataas.com/cat/says/${catFact.split(" ")[0]}`);
-    }
-  }, [catFact]);
 
   return (
     <main>
       <h1>Prueba Técnica 1</h1>
 
       <section>
-        <button onClick={getCatFact}>Obtener un hecho sobre gatos</button>
+        <button onClick={handleClick}>Obtener un hecho sobre gatos</button>
 
-        {catFact && <Fact catFact={catFact} />}
+        {fact && <Fact catFact={imageUrl} />}
       </section>
     </main>
   );
